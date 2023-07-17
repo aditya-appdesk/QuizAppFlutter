@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_quiz/ui/Result.dart';
 
 class ScreenFile extends StatefulWidget {
   ScreenFile({super.key});
@@ -265,6 +266,9 @@ class _ScreenFileState extends State<ScreenFile> {
       )),
       body: Column(
         children: [
+          SizedBox(
+            height: 40,
+          ),
           Text(
             "Question :${questionINdex + 1}/${quizListData.length}",
             style: const TextStyle(
@@ -387,6 +391,20 @@ class _ScreenFileState extends State<ScreenFile> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            if (questionINdex == quizListData.length - 1) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Result()),
+              );
+            } else {
+              _pageController.nextPage(
+                  duration: Duration(microseconds: 5), curve: Curves.easeIn);
+            }
+          },
+          label: Text(
+              questionINdex == quizListData.length - 1 ? "Submit" : "Next")),
     );
   }
 }
