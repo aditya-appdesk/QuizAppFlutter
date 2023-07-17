@@ -15,8 +15,7 @@ class _ScreenFileState extends State<ScreenFile> {
       "answer_discription": "",
       "is_answered": 0,
       "is_answer_status_right_wrong_omitted": 0,
-      "title":
-          "Who is PM of INDIA ?",
+      "title": "Who is PM of INDIA ?",
       "options": [
         {
           "option": "a",
@@ -46,8 +45,7 @@ class _ScreenFileState extends State<ScreenFile> {
       "answer_discription": "",
       "is_answered": 0,
       "is_answer_status_right_wrong_omitted": 0,
-      "title":
-          "Virat Kholi is a _ ?",
+      "title": "Virat Kholi is a _ ?",
       "options": [
         {
           "option": "a",
@@ -137,8 +135,7 @@ class _ScreenFileState extends State<ScreenFile> {
       "answer_discription": "",
       "is_answered": 0,
       "is_answer_status_right_wrong_omitted": 0,
-      "title":
-          "Who score double century 3 times",
+      "title": "Who score double century 3 times",
       "options": [
         {
           "option": "a",
@@ -168,8 +165,7 @@ class _ScreenFileState extends State<ScreenFile> {
       "answer_discription": "",
       "is_answered": 0,
       "is_answer_status_right_wrong_omitted": 0,
-      "title":
-          "Who score fastest Centuriy in ODI ?",
+      "title": "Who score fastest Centuriy in ODI ?",
       "options": [
         {
           "option": "a",
@@ -283,26 +279,31 @@ class _ScreenFileState extends State<ScreenFile> {
                 itemCount: quizListData.length,
                 onPageChanged: (page) {
                   setState(
-                        () {
+                    () {
                       questionINdex = page;
                     },
                   );
                 },
                 itemBuilder: (context, index) {
-                  return Column(
-                      children: [
-                        Container(
-                        margin: EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
-                        decoration: BoxDecoration(color: Colors.cyanAccent,borderRadius: BorderRadius.circular(8)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(quizListData[index]['title'],style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                          ),
+                  return Column(children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: 10, right: 10, top: 20, bottom: 20),
+                      decoration: BoxDecoration(
+                          color: Colors.cyanAccent,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          quizListData[index]['title'],
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
                       ),
-
-                        ...quizListData[index]['options']
-                            .map(
-                              (data) => Padding(
+                    ),
+                    ...quizListData[index]['options']
+                        .map(
+                          (data) => Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5),
                             child: SizedBox(
                               width: double.maxFinite,
@@ -330,19 +331,17 @@ class _ScreenFileState extends State<ScreenFile> {
                                             quizListData[index]['answer']) {
                                           data['color'] = "0xFF31CD63";
                                           quizListData[index][
-                                          'is_answer_status_right_wrong_omitted'] = 1;
+                                              'is_answer_status_right_wrong_omitted'] = 1;
                                         } else {
                                           data['color'] = "0xFFFF0000";
                                           quizListData[index][
-                                          'is_answer_status_right_wrong_omitted'] = 2;
+                                              'is_answer_status_right_wrong_omitted'] = 2;
                                         }
-                                        quizListData[index]['is_answered'] =
-                                        1;
+                                        quizListData[index]['is_answered'] = 1;
                                       });
-                                    } else { }
+                                    } else {}
                                   },
-                                  child:
-                                  Row(
+                                  child: Row(
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -382,9 +381,8 @@ class _ScreenFileState extends State<ScreenFile> {
                             ),
                           ),
                         )
-                            .toList(),
-                      ]
-                  );
+                        .toList(),
+                  ]);
                 }),
           ),
         ],
