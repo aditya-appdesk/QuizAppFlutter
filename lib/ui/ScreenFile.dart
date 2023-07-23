@@ -204,6 +204,39 @@ class _ScreenFileState extends State<ScreenFile> {
 
   int totalRight = 0;
 
+  quizResult() {
+    userPercentage = 0;
+    wrongQ = 0;
+    ommitedQuestion = 0;
+    totalRight = 0;
+    for (int i = 0; i < quizListData.length; i++) {
+      if (quizListData[i]['is_answer_status_right_wrong_omitted'] == 0) {
+        ommitedQuestion++;
+      }
+      if (quizListData[i]['is_answer_status_right_wrong_omitted'] == 1) {
+        totalRight++;
+      }
+      if (quizListData[i]['is_answer_status_right_wrong_omitted'] == 2) {
+        wrongQ++;
+      }
+    }
+    if (questionINdex == quizListData.length - 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Result(
+              userPercentage: userPercentage,
+              totalRight: totalRight,
+              wrongQ: wrongQ,
+              ommitedQuestion: ommitedQuestion,
+            )),
+      );
+    } else {
+      _pageController.nextPage(
+          duration: Duration(microseconds: 5), curve: Curves.easeIn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -393,15 +426,7 @@ class _ScreenFileState extends State<ScreenFile> {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            if (questionINdex == quizListData.length - 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Result()),
-              );
-            } else {
-              _pageController.nextPage(
-                  duration: Duration(microseconds: 5), curve: Curves.easeIn);
-            }
+          quizResult();
           },
           label: Text(
               questionINdex == quizListData.length - 1 ? "Submit" : "Next")),
