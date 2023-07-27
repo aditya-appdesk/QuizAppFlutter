@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_quiz/ui/LoginScreen.dart';
-import 'package:my_quiz/ui/ScreenFile.dart';
+
+import 'package:my_quiz/ui/SplashScreen.dart';
 
 void main() {
   runApp(MyAppData());
@@ -9,13 +9,14 @@ void main() {
 class MyAppData extends StatelessWidget {
   const MyAppData({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "NewApp",
         theme: ThemeData.light(),
         debugShowCheckedModeBanner: false,
-        home:LoginScreen()
+        home:SplashScreen()
     );
   }
 }

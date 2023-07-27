@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_quiz/ui/LoginScreen.dart';
 import 'package:my_quiz/ui/Result.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenFile extends StatefulWidget {
   ScreenFile({super.key});
@@ -294,7 +296,9 @@ class _ScreenFileState extends State<ScreenFile> {
                 "Logout".toUpperCase(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              onTap: () {}),
+              onTap: () {
+                logOutUser();
+              }),
         ],
       )),
       body: Column(
@@ -431,5 +435,15 @@ class _ScreenFileState extends State<ScreenFile> {
           label: Text(
               questionINdex == quizListData.length - 1 ? "Submit" : "Next")),
     );
+  }
+
+  Future<void> logOutUser() async {
+    var sharedPref = await SharedPreferences.getInstance();
+    sharedPref.setBool("Login", false);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  LoginScreen()),
+    );
+
   }
 }

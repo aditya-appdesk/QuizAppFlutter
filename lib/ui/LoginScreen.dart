@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_quiz/ui/OtpScreen.dart';
 import 'package:my_quiz/ui/ScreenFile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailTextCont = TextEditingController();
+  TextEditingController passwordTextCont = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +54,7 @@ class LoginScreen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     margin: EdgeInsets.only(top: 10,left: 10,right: 10),
                     child: TextField(
+                      controller: emailTextCont,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: "Enter Your Email"),
@@ -57,6 +68,7 @@ class LoginScreen extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     margin: EdgeInsets.only(top: 5,left: 10,right: 10),
                     child: TextField(
+                      controller: passwordTextCont,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: "Enter Your Password"),
@@ -72,11 +84,20 @@ class LoginScreen extends StatelessWidget {
                     margin: EdgeInsets.only(top: 5,left: 10,right: 10),
                     child: ElevatedButton(
                       child: Text("Login"),
-                      onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  ScreenFile()),
-                        );
+                      onPressed: () async {
+                        String email = emailTextCont.text;
+                        String password = passwordTextCont.text;
+                        var sharedPref = await SharedPreferences.getInstance();
+                        if(email != "" && password != ""){
+                          sharedPref.setBool("Login", true);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  ScreenFile()),
+                          );
+                        }else{
+                          sharedPref.setBool("Login", false);
+                        }
+
                       },
                     ),
                   ),
